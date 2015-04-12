@@ -7,7 +7,7 @@ import re
 import os
 
 # 保存文件，保存二进制文件时不用指定文件编码
-def saveFile(data, file = './h.txt'):
+def saveFile(data, file = './example.txt'):
     save_path = file
     f_obj = open(save_path, 'w', encoding="UTF-8")
     # f_obj = open(save_path, 'wb')
@@ -19,8 +19,8 @@ def saveFile(data, file = './h.txt'):
 def getTitle(data):
     pattern = re.compile('<title>(.*?)</title>')
     for x in pattern.findall(data):
-        saveFile(x)
-        break
+        # 这里只返回匹配到的第一个数据
+        return x
 
 
 # 抓取网页
@@ -35,6 +35,6 @@ def catchUrl(url):
 
 # 程序主体
 if __name__ == '__main__':
-    data = catchUrl("http://www.baidu.com/")
-    saveFile(data, './hehe.txt')
-    getTitle(data)
+    data = catchUrl("http://www.baidu.com/")    
+    data = getTitle(data)
+    saveFile(data, './result.txt')
